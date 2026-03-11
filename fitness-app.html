@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="训练计划">
+<meta name="theme-color" content="#0f0f13">
+<title>减脂训练计划</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f0f13;
+  --surface: #18181f;
+  --card: #1e1e27;
+  --border: #2a2a38;
+  --gym: #ff6b35;
+  --dorm: #4a9eff;
+  --rest: #4caf7d;
+  --text: #f0f0f5;
+  --text2: #a0a0b8;
+  --text3: #606078;
+  --tip: #f5c842;
+  --safe: env(safe-area-inset-bottom, 0px);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  font-weight: 300;
+  overscroll-behavior: none;
+}
+
+/* HEADER */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15,15,19,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: env(safe-area-inset-top, 0) 0 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  padding: 14px 20px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.app-subtitle {
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 1px;
+  margin-top: 1px;
+}
+
+.week-badge {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 11px;
+  color: var(--text2);
+  letter-spacing: 0.5px;
+}
+
+/* WEEK BAR */
+.week-bar {
+  display: flex;
+  padding: 12px 16px 10px;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.week-bar::-webkit-scrollbar { display: none; }
+
+.day-chip {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 46px;
+}
+
+.day-chip.active-gym { border-color: var(--gym); background: rgba(255,107,53,0.12); }
+.day-chip.active-dorm { border-color: var(--dorm); background: rgba(74,158,255,0.12); }
+.day-chip.active-rest { border-color: var(--rest); background: rgba(76,175,125,0.12); }
+
+.chip-day { font-size: 10px; color: var(--text3); letter-spacing: 1px; font-weight: 500; }
+.chip-dot { width: 6px; height: 6px; border-radius: 50%; }
+.chip-dot.gym { background: var(--gym); }
+.chip-dot.dorm { background: var(--dorm); }
+.chip-dot.rest { background: var(--rest); }
+.chip-label { font-size: 9px; font-weight: 600; letter-spacing: 0.5px; }
+.chip-label.gym { color: var(--gym); }
+.chip-label.dorm { color: var(--dorm); }
+.chip-label.rest { color: var(--rest); }
+
+/* MAIN SCROLL */
+.main-scroll {
+  height: calc(100vh - 130px);
+  overflow-y: auto;
+  padding: 0 0 calc(24px + var(--safe));
+  scrollbar-width: none;
+}
+.main-scroll::-webkit-scrollbar { display: none; }
+
+/* DAY VIEW */
+.day-view { display: none; padding: 16px; }
+.day-view.active { display: block; }
+
+/* DAY HERO */
+.day-hero {
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.day-hero.gym-hero { background: linear-gradient(135deg, rgba(255,107,53,0.2), rgba(255,107,53,0.05)); border: 1px solid rgba(255,107,53,0.3); }
+.day-hero.dorm-hero { background: linear-gradient(135deg, rgba(74,158,255,0.2), rgba(74,158,255,0.05)); border: 1px solid rgba(74,158,255,0.3); }
+.day-hero.rest-hero { background: linear-gradient(135deg, rgba(76,175,125,0.2), rgba(76,175,125,0.05)); border: 1px solid rgba(76,175,125,0.3); }
+
+.hero-type { font-size: 10px; letter-spacing: 2px; font-weight: 600; text-transform: uppercase; margin-bottom: 6px; }
+.gym-hero .hero-type { color: var(--gym); }
+.dorm-hero .hero-type { color: var(--dorm); }
+.rest-hero .hero-type { color: var(--rest); }
+
+.hero-title { font-size: 22px; font-weight: 700; line-height: 1.2; margin-bottom: 12px; }
+
+.hero-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.hero-tag {
+  background: rgba(255,255,255,0.07);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 11px;
+  color: var(--text2);
+  font-weight: 500;
+}
+
+/* BLOCK CARD */
+.block-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.block-header {
+  padding: 14px 16px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.block-title-row { display: flex; align-items: center; gap: 10px; }
+
+.block-num {
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  flex-shrink: 0;
+}
+.gym-num { background: rgba(255,107,53,0.2); color: var(--gym); }
+.dorm-num { background: rgba(74,158,255,0.2); color: var(--dorm); }
+
+.block-name { font-size: 14px; font-weight: 600; }
+.block-dur { font-size: 11px; color: var(--text3); margin-top: 1px; }
+
+.chevron {
+  color: var(--text3);
+  font-size: 14px;
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.block-card.open .chevron { transform: rotate(180deg); }
+
+.block-body {
+  display: none;
+  border-top: 1px solid var(--border);
+}
+.block-card.open .block-body { display: block; }
+
+/* CIRCUIT TAG */
+.circuit-tag {
+  margin: 12px 16px 4px;
+  background: rgba(245,200,66,0.1);
+  border: 1px solid rgba(245,200,66,0.25);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 11px;
+  color: var(--tip);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* EXERCISE ROW */
+.ex-row {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  cursor: pointer;
+}
+.ex-row:last-child { border-bottom: none; }
+
+.ex-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.ex-name { font-size: 14px; color: var(--text); font-weight: 400; line-height: 1.3; flex: 1; }
+.ex-name .mod-badge {
+  display: inline-block;
+  font-size: 9px;
+  background: rgba(74,158,255,0.15);
+  color: var(--dorm);
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin-left: 6px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+}
+.ex-name .key-badge {
+  display: inline-block;
+  font-size: 9px;
+  background: rgba(255,107,53,0.15);
+  color: var(--gym);
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin-left: 6px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+}
+
+.ex-spec {
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.gym-spec { color: var(--gym); }
+.dorm-spec { color: var(--dorm); }
+
+.ex-tip {
+  display: none;
+  margin-top: 8px;
+  background: rgba(255,255,255,0.04);
+  border-left: 2px solid var(--tip);
+  border-radius: 0 6px 6px 0;
+  padding: 8px 10px;
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.7;
+}
+.ex-row.open .ex-tip { display: block; }
+.ex-tip .tip-label { font-size: 10px; color: var(--tip); font-weight: 700; letter-spacing: 1px; margin-bottom: 3px; }
+
+/* FOAM ROLLER */
+.foam-section {
+  padding: 12px 16px;
+}
+.foam-title {
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.foam-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 13px;
+  color: var(--text2);
+}
+.foam-item:last-child { border-bottom: none; }
+.foam-spec { font-size: 12px; color: var(--dorm); font-weight: 600; }
+
+/* NOTE BOX */
+.note-box {
+  margin: 16px;
+  background: rgba(245,200,66,0.07);
+  border: 1px solid rgba(245,200,66,0.2);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.8;
+}
+.note-box .note-title { color: var(--tip); font-weight: 600; font-size: 11px; letter-spacing: 1px; margin-bottom: 5px; }
+
+/* HR INFO */
+.hr-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.hr-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 13px;
+}
+.hr-row:last-child { border-bottom: none; }
+.hr-label { color: var(--text2); }
+.hr-val { font-weight: 700; font-size: 14px; }
+.hr-val.green { color: var(--rest); }
+.hr-val.orange { color: var(--gym); }
+.hr-val.red { color: #ff4444; }
+
+/* REST DAY */
+.rest-content {
+  padding: 20px;
+  text-align: center;
+}
+.rest-icon { font-size: 48px; margin-bottom: 16px; }
+.rest-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.rest-sub { font-size: 14px; color: var(--text2); line-height: 1.8; }
+
+/* BOTTOM TABS */
+.bottom-tabs {
+  position: fixed;
+  bottom: 0;
+  left: 0; right: 0;
+  background: rgba(15,15,19,0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  padding-bottom: var(--safe);
+}
+
+.tab-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0 8px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--text3);
+  font-family: inherit;
+  transition: color 0.2s;
+  gap: 3px;
+}
+.tab-btn.active { color: var(--gym); }
+.tab-btn .tab-icon { font-size: 20px; line-height: 1; }
+.tab-btn .tab-label { font-size: 10px; letter-spacing: 0.5px; font-weight: 500; }
+
+/* TAB PAGES */
+.tab-page { display: none; height: calc(100vh - 130px); overflow-y: auto; padding-bottom: calc(80px + var(--safe)); }
+.tab-page.active { display: block; }
+.tab-page::-webkit-scrollbar { display: none; }
+
+/* TIPS PAGE */
+.tips-page-inner { padding: 16px; }
+.tips-section-title {
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 20px 0 10px;
+}
+.tips-section-title:first-child { margin-top: 0; }
+.tip-card-full {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.8;
+}
+.tip-card-full strong { color: var(--text); font-weight: 600; }
+.tip-card-full .tip-head { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+
+/* DIET PAGE */
+.diet-inner { padding: 16px; }
+.macro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+.macro-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+}
+.macro-val { font-size: 26px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+.macro-label { font-size: 11px; color: var(--text3); letter-spacing: 0.5px; }
+.macro-box.protein .macro-val { color: var(--rest); }
+.macro-box.carb .macro-val { color: var(--tip); }
+.macro-box.fat .macro-val { color: var(--gym); }
+.macro-box.cal .macro-val { color: var(--dorm); }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="app-header">
+  <div class="header-inner">
+    <div>
+      <div class="app-title">减脂训练计划</div>
+      <div class="app-subtitle">健身房 ×4 · 宿舍 ×2 · 周二休息</div>
+    </div>
+    <div class="week-badge">2~3月计划</div>
+  </div>
+  <div class="week-bar" id="weekBar">
+    <div class="day-chip active-gym" onclick="switchDay(0)">
+      <span class="chip-day">一</span>
+      <span class="chip-dot gym"></span>
+      <span class="chip-label gym">健身房</span>
+    </div>
+    <div class="day-chip active-rest" onclick="switchDay(1)">
+      <span class="chip-day">二</span>
+      <span class="chip-dot rest"></span>
+      <span class="chip-label rest">休息</span>
+    </div>
+    <div class="day-chip active-gym" onclick="switchDay(2)">
+      <span class="chip-day">三</span>
+      <span class="chip-dot gym"></span>
+      <span class="chip-label gym">健身房</span>
+    </div>
+    <div class="day-chip active-dorm" onclick="switchDay(3)">
+      <span class="chip-day">四</span>
+      <span class="chip-dot dorm"></span>
+      <span class="chip-label dorm">宿舍</span>
+    </div>
+    <div class="day-chip active-gym" onclick="switchDay(4)">
+      <span class="chip-day">五</span>
+      <span class="chip-dot gym"></span>
+      <span class="chip-label gym">健身房</span>
+    </div>
+    <div class="day-chip active-gym" onclick="switchDay(5)">
+      <span class="chip-day">六</span>
+      <span class="chip-dot gym"></span>
+      <span class="chip-label gym">健身房</span>
+    </div>
+    <div class="day-chip active-dorm" onclick="switchDay(6)">
+      <span class="chip-day">日</span>
+      <span class="chip-dot dorm"></span>
+      <span class="chip-label dorm">宿舍</span>
+    </div>
+  </div>
+</div>
+
+<!-- TAB PAGES WRAPPER -->
+<div id="tabWorkout" class="tab-page active">
+
+<!-- ======== MONDAY ======== -->
+<div class="day-view active" id="day-0">
+  <div class="day-hero gym-hero">
+    <div class="hero-type">周一 · 健身房 A</div>
+    <div class="hero-title">有氧燃脂日</div>
+    <div class="hero-tags">
+      <span class="hero-tag">⏱ 约35分钟</span>
+      <span class="hero-tag">🎯 130~150 bpm</span>
+      <span class="hero-tag">🔥 椭圆机主导</span>
+    </div>
+  </div>
+
+  <div class="block-card open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">1</div>
+        <div><div class="block-name">有氧主体</div><div class="block-dur">25分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">椭圆机 · 中等阻力</span><span class="ex-spec gym-spec">25min</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>不扶把手，直立站稳，核心轻收；步频稳定，不要耸肩；阻力调至感觉"有点费力但能持续"的程度。不扶把手可多激活核心和腿部约15%。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">目标心率区间</span><span class="ex-spec gym-spec">130~150</span></div>
+        <div class="ex-tip"><div class="tip-label">判断标准</div>能说完整句子但说话有点喘 = 在正确区间。如果能轻松聊天 → 加阻力；如果喘不上来 → 降阻力。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">2</div>
+        <div><div class="block-name">有氧收尾</div><div class="block-dur">8分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">跑步机坡度快走</span><span class="ex-spec gym-spec">8min</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>坡度 6~8%，速度 5.5~6 km/h；身体轻微前倾，不要驼背；手臂自然摆动，不要扶扶手；感受臀腿发力，尤其是臀大肌。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">3</div>
+        <div><div class="block-name">放松收尾</div><div class="block-dur">2分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">原地踱步 + 深呼吸</span><span class="ex-spec gym-spec">2min</span></div>
+        <div class="ex-tip"><div class="tip-label">要点</div>心率降至100以下再离开。鼻吸嘴呼，4秒吸气、6秒呼气，放松肩颈。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hr-card">
+    <div class="note-box" style="margin:0; border-radius:8px;">
+      <div class="note-title">💡 今日提示</div>
+      椭圆机优先选靠近镜子的位置，方便观察自己的姿态是否直立。全程保持腹部轻度收紧，顺带激活核心。
+    </div>
+  </div>
+</div>
+
+<!-- ======== TUESDAY REST ======== -->
+<div class="day-view" id="day-1">
+  <div class="day-hero rest-hero">
+    <div class="hero-type">周二 · 休息日</div>
+    <div class="hero-title">主动恢复</div>
+    <div class="hero-tags">
+      <span class="hero-tag">🚶 轻度活动</span>
+      <span class="hero-tag">😴 充足睡眠</span>
+    </div>
+  </div>
+  <div class="block-card open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num" style="background:rgba(76,175,125,0.2);color:var(--rest)">✓</div>
+        <div><div class="block-name">今日安排</div><div class="block-dur">不做正式训练</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="foam-section">
+        <div class="foam-item"><span>轻松散步</span><span class="foam-spec" style="color:var(--rest)">20~30分钟</span></div>
+        <div class="foam-item"><span>全身静态拉伸（可选）</span><span class="foam-spec" style="color:var(--rest)">10分钟</span></div>
+        <div class="foam-item"><span>睡眠</span><span class="foam-spec" style="color:var(--rest)">7~8小时</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="note-box">
+    <div class="note-title">骨盆前倾日常提醒</div>
+    今天不训练，但这三件事每天都要做：<br>
+    ① 坐着时主动收腹，别塌腰<br>
+    ② 走路时轻收臀部<br>
+    ③ 每小时起身活动一次
+  </div>
+</div>
+
+<!-- ======== WEDNESDAY ======== -->
+<div class="day-view" id="day-2">
+  <div class="day-hero gym-hero">
+    <div class="hero-type">周三 · 健身房 B</div>
+    <div class="hero-title">有氧燃脂日</div>
+    <div class="hero-tags">
+      <span class="hero-tag">⏱ 约35分钟</span>
+      <span class="hero-tag">🎯 130~145 bpm</span>
+      <span class="hero-tag">🔥 划船机主导</span>
+    </div>
+  </div>
+
+  <div class="block-card open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">1</div>
+        <div><div class="block-name">有氧主体</div><div class="block-dur">20分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">划船机 · 中等配速<span class="key-badge">⭐矫正</span></span><span class="ex-spec gym-spec">20min</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>坐直，不弓腰；拉桨时先蹬腿、再收腹、最后手臂拉；回程先伸手臂、再屈腿；全程核心收紧。划船机是难得的既燃脂又锻炼脊柱伸展的器械，对骨盆前倾矫正有一定帮助。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">2</div>
+        <div><div class="block-name">有氧次体</div><div class="block-dur">12分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">单车 · 中等阻力</span><span class="ex-spec gym-spec">12min</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>座位调至踩到最低点时腿微弯（非完全伸直）；踩踏时脚尖略向下，感受大腿和臀部发力；上身挺直，不要趴在把手上。心率维持 125~145 bpm。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">3</div>
+        <div><div class="block-name">放松收尾</div><div class="block-dur">3分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">原地踱步 · 肩颈放松</span><span class="ex-spec gym-spec">3min</span></div>
+        <div class="ex-tip"><div class="tip-label">要点</div>做几次耸肩后下压的动作放松斜方肌，因为划船机容易让肩颈发紧。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== THURSDAY DORM ======== -->
+<div class="day-view" id="day-3">
+  <div class="day-hero dorm-hero">
+    <div class="hero-type">周四 · 宿舍 A</div>
+    <div class="hero-title">臀腿 + 骨盆矫正</div>
+    <div class="hero-tags">
+      <span class="hero-tag">⏱ 约55分钟</span>
+      <span class="hero-tag">🎯 源自 Day 1</span>
+      <span class="hero-tag">🦴 骨盆重点日</span>
+    </div>
+  </div>
+
+  <div class="block-card open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num dorm-num">1</div>
+        <div><div class="block-name">热身 + 凯格尔激活</div><div class="block-dur">8分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">骨盆反转练习</span><span class="ex-spec dorm-spec">20次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧屈膝，脚平放；呼气时用腹肌力量将骨盆向后倾、腰部贴地；吸气时还原。动作慢，感受腰椎和地面的距离变化。这是矫正骨盆前倾的核心动作。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">仰卧开髋</span><span class="ex-spec dorm-spec">20次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，双腿屈膝合拢；缓慢向两侧打开膝盖，感受内收肌和髋关节拉伸；不要让腰部离地。每次打开保持1秒再合拢。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">死虫式<span class="key-badge">⭐核心</span></span><span class="ex-spec dorm-spec">每侧8次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，手臂垂直举起，双腿抬起屈膝90°；呼气，右手向后伸展的同时左腿缓慢向前下方伸出；全程腰部贴地不离地；吸气还原。腰部离地说明核心力量不足，减小腿的伸展幅度。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">臀桥</span><span class="ex-spec dorm-spec">15次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧屈膝，脚跟靠近臀部；呼气时收紧臀部，用臀部力量将髋部推高；顶部停留1秒，感受臀部最大收缩；缓慢下降不完全落地。避免用腰部代偿。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">原地慢速踏步提膝<span class="mod-badge">静音版</span></span><span class="ex-spec dorm-spec">40秒</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>替换原计划高抬腿。慢速提膝至腰部高度，轻放落地；重心在支撑腿上，保持躯干直立；有意识地收紧核心，感受髋屈肌的工作。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num dorm-num">2</div>
+        <div><div class="block-name">核心燃脂循环</div><div class="block-dur">10分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="circuit-tag">⚡ 45秒动 + 15秒休，循环两组</div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">相扑深蹲</span><span class="ex-spec dorm-spec">45s</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>站距比肩宽，脚尖朝外45°；下蹲时膝盖对准脚尖方向，不内扣；躯干挺直，不弓腰；下到大腿与地面平行；起身时臀部发力。感受内收肌和臀部拉伸。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">站姿提膝击掌（慢速）</span><span class="ex-spec dorm-spec">45s</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>单腿站立时收紧支撑腿的臀部；提膝时腰部不要弯曲；双手从两侧击掌的同时，感受腹部收紧。慢速控制，不要借助惯性。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">后撤步箭步蹲</span><span class="ex-spec dorm-spec">45s</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>一脚向后迈出，前腿膝盖不超过脚尖；后膝接近但不触地；躯干直立，不前倾；两腿交替进行。感受前腿臀部和大腿的拉伸与发力。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">侧腹卷腹</span><span class="ex-spec dorm-spec">45s</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，手放耳侧；卷腹时右肘朝向左膝，感受右侧腹肌收缩；不要用手拉头颈；下背部始终贴地；左右交替。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">靠墙静蹲</span><span class="ex-spec dorm-spec">45s</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>背靠墙，膝盖弯曲90°，大腿与地面平行；脚跟在膝盖正下方；双手放膝盖上不要借力；感受股四头肌持续发力。坚持住，这是本循环里强度最高的动作。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num dorm-num">3</div>
+        <div><div class="block-name">臀腿力量塑形</div><div class="block-dur">22分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">弹力带臀桥<span class="mod-badge">弹力带</span></span><span class="ex-spec dorm-spec">3组×15次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>弹力带绕膝盖上方；双膝向外推撑弹力带，同时向上推髋；顶部夹紧臀部3秒；慢慢下降。弹力带的阻力会激活臀中肌，比普通臀桥矫正效果更好。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">弹力带蚌式开合<span class="mod-badge">弹力带</span></span><span class="ex-spec dorm-spec">每侧3组×15次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>侧卧，弹力带绕膝上方，屈髋屈膝；上方膝盖缓慢向天花板打开，骨盆不要旋转；顶部停留1秒再下落；感受臀中肌发力。这是骨盆前倾矫正的关键动作之一。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">跪姿后踢腿<span class="mod-badge">弹力带</span><span class="key-badge">⭐</span></span><span class="ex-spec dorm-spec">每侧3组×12次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>四肢撑地，弹力带套脚踝；核心收紧，腰部不塌陷；单腿向后上方踢出，髋部不旋转；顶部停留感受臀大肌收缩；腰部保持中立位，不要过度后仰。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">侧卧直腿上抬<span class="mod-badge">弹力带</span></span><span class="ex-spec dorm-spec">每侧2组×15次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>侧卧，身体成一直线；上方腿伸直向上抬起，脚尖略向前；不要借助躯干摇晃；感受臀中肌发力。动作幅度不用大，感受到肌肉发力即可。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">俯卧对角伸展</span><span class="ex-spec dorm-spec">2组×10次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>俯卧，同时抬起右手和左腿，保持2秒，感受背部肌群收缩；脖子保持中立，不要抬头；腹部轻微收紧防止腰部过度塌陷；两侧交替。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">桥式交替抬腿</span><span class="ex-spec dorm-spec">2组×20次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>保持臀桥顶部位置，单腿缓慢抬起伸直；骨盆保持水平不倾斜；核心全程收紧；左右交替。这个动作对核心稳定性要求较高，做慢一点。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num dorm-num">4</div>
+        <div><div class="block-name">泡沫轴放松</div><div class="block-dur">5分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="foam-section">
+        <div class="foam-title">滚压部位</div>
+        <div class="ex-row" onclick="toggleEx(this)">
+          <div class="ex-top"><span class="ex-name">股四头肌</span><span class="ex-spec dorm-spec">每侧45秒</span></div>
+          <div class="ex-tip"><div class="tip-label">要领</div>俯卧，泡沫轴放大腿前侧；用手臂支撑身体，缓慢前后滚动；遇到痛点停留10秒；不要在膝盖和髋骨上滚压。</div>
+        </div>
+        <div class="ex-row" onclick="toggleEx(this)">
+          <div class="ex-top"><span class="ex-name">髂胫束（大腿外侧）</span><span class="ex-spec dorm-spec">每侧45秒</span></div>
+          <div class="ex-tip"><div class="tip-label">要领</div>侧卧，泡沫轴放大腿外侧；从膝盖外侧滚至髋部外侧；髂胫束通常很紧，刚开始会很疼，属于正常现象。</div>
+        </div>
+        <div class="ex-row" onclick="toggleEx(this)">
+          <div class="ex-top"><span class="ex-name">臀部</span><span class="ex-spec dorm-spec">每侧30秒</span></div>
+          <div class="ex-tip"><div class="tip-label">要领</div>坐在泡沫轴上，一侧脚踝搭在另一侧膝盖上；身体向该侧倾斜，滚压臀部外侧；对梨状肌（骨盆稳定的关键肌）放松效果好。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num dorm-num">5</div>
+        <div><div class="block-name">拉伸放松</div><div class="block-dur">7分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">蛙式拉伸</span><span class="ex-spec dorm-spec">2分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>双膝跪地向两侧打开，脚尖朝外；慢慢将臀部向后下方坐；感受大腿内侧和髋关节拉伸；保持自然呼吸，不要憋气；感觉拉伸逐渐加深属正常。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">仰卧抱膝放松</span><span class="ex-spec dorm-spec">1分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，双手抱膝贴向胸口；轻轻左右摇摆，放松腰部和骶髂关节；这个动作对久坐造成的骨盆前倾有很好的即时缓解效果。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">跪姿髋屈肌拉伸<span class="key-badge">⭐骨盆关键</span></span><span class="ex-spec dorm-spec">每侧1分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>单膝跪地，前腿屈膝90°；骨盆向后倾（收腹、夹臀），然后重心缓慢前移；感受后腿大腿前侧和腹股沟深处拉伸；这里就是髂腰肌，骨盆前倾的主要"罪魁祸首"。每次拉伸都要认真做。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">婴儿式呼吸</span><span class="ex-spec dorm-spec">2分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>跪坐，臀部坐向脚跟，双手向前伸展趴下；进行腹式呼吸：吸气感受腹部和背部膨胀，呼气放松全身；让脊柱在重力下自然拉伸。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== FRIDAY ======== -->
+<div class="day-view" id="day-4">
+  <div class="day-hero gym-hero">
+    <div class="hero-type">周五 · 健身房 C</div>
+    <div class="hero-title">有氧燃脂日</div>
+    <div class="hero-tags">
+      <span class="hero-tag">⏱ 约35分钟</span>
+      <span class="hero-tag">🎯 130~148 bpm</span>
+      <span class="hero-tag">🔥 坡度快走主导</span>
+    </div>
+  </div>
+  <div class="block-card open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">1</div>
+        <div><div class="block-name">有氧主体</div><div class="block-dur">25分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">跑步机坡度快走<span class="key-badge">⭐臀腿</span></span><span class="ex-spec gym-spec">25min</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>坡度 8~10%，速度 5.5~6.5 km/h；不扶扶手；身体轻微前倾但不驼背；感受每一步臀大肌的发力；相比平地跑，坡度快走更护膝、臀腿激活效果更强，是减脂期最推荐的有氧方式之一。</div>
+      </div>
+    </div>
+  </div>
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">2</div>
+        <div><div class="block-name">有氧收尾</div><div class="block-dur">8分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">单车 · 低阻力放松</span><span class="ex-spec gym-spec">8min</span></div>
+        <div class="ex-tip"><div class="tip-label">要点</div>心率逐渐降至110以下再停。这段时间放松踩踏，不要突然停止运动，防止血液回流不及造成头晕。</div>
+      </div>
+    </div>
+  </div>
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">3</div>
+        <div><div class="block-name">放松收尾</div><div class="block-dur">2分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">原地踱步 · 深呼吸</span><span class="ex-spec gym-spec">2min</span></div>
+        <div class="ex-tip"><div class="tip-label">要点</div>做几组肩部向后绕环，缓解坡度快走时的上斜方肌紧张。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== SATURDAY ======== -->
+<div class="day-view" id="day-5">
+  <div class="day-hero gym-hero">
+    <div class="hero-type">周六 · 健身房 D</div>
+    <div class="hero-title">有氧燃脂日</div>
+    <div class="hero-tags">
+      <span class="hero-tag">⏱ 约35分钟</span>
+      <span class="hero-tag">🎯 130~150 bpm</span>
+      <span class="hero-tag">🔥 单车主导</span>
+    </div>
+  </div>
+  <div class="block-card open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">1</div>
+        <div><div class="block-name">有氧主体</div><div class="block-dur">20分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">单车 · 中高阻力</span><span class="ex-spec gym-spec">20min</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>阻力调至踩踏有明显费力感；座位高度：踩到最低点时腿微弯，非完全伸直；踩踏节奏匀速，避免忽快忽慢；目标心率 130~150 bpm。</div>
+      </div>
+    </div>
+  </div>
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">2</div>
+        <div><div class="block-name">有氧次体</div><div class="block-dur">12分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">划船机 · 匀速稳定</span><span class="ex-spec gym-spec">12min</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>核心收紧，坐直；不耸肩，肩膀下沉；匀速拉桨，不要冲刺；这段作为次体，强度略低于周三，重在延长有氧时间。</div>
+      </div>
+    </div>
+  </div>
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">3</div>
+        <div><div class="block-name">放松收尾</div><div class="block-dur">3分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">原地踱步放松</span><span class="ex-spec gym-spec">3min</span></div>
+        <div class="ex-tip"><div class="tip-label">要点</div>活动一下髋关节，做几个前后画圈，缓解划船机对髋关节的压力。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== SUNDAY DORM ======== -->
+<div class="day-view" id="day-6">
+  <div class="day-hero dorm-hero">
+    <div class="hero-type">周日 · 宿舍 B</div>
+    <div class="hero-title">上肢 + 核心控制</div>
+    <div class="hero-tags">
+      <span class="hero-tag">⏱ 约55分钟</span>
+      <span class="hero-tag">🎯 源自 Day 2</span>
+      <span class="hero-tag">💪 核心重点日</span>
+    </div>
+  </div>
+
+  <div class="block-card open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num dorm-num">1</div>
+        <div><div class="block-name">热身 + 凯格尔激活</div><div class="block-dur">5分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">侧步触地<span class="mod-badge">静音版</span></span><span class="ex-spec dorm-spec">1分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>替换原计划开合跳。两脚交替向侧方迈出，同时同侧手触地；动作轻盈落地，全程无跳跃；既能升高心率又不扰邻。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">动态肩环绕</span><span class="ex-spec dorm-spec">1分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>手臂伸直，从前向后做大幅度画圈；感受肩关节活动范围，缓慢有控制；正反各30秒。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">平板支撑</span><span class="ex-spec dorm-spec">1分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>手肘或手掌撑地，身体从头到脚一条直线；臀部不能翘起也不能下塌；核心收紧，正常呼吸；目视地面，颈部中立。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">仰卧收髋</span><span class="ex-spec dorm-spec">20次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，双腿抬起屈膝90°；呼气时用下腹部力量将膝盖向胸口拉近；腰部保持贴地；感受下腹部的收缩。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">毛毛虫爬</span><span class="ex-spec dorm-spec">5次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>站立，弯腰手掌触地；双手慢慢向前爬至俯卧撑位；再爬回来站起。全程腿尽量伸直，感受腘绳肌拉伸；每次做完站起时注意慢一点防止头晕。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num dorm-num">2</div>
+        <div><div class="block-name">上肢力量与核心</div><div class="block-dur">15分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">平板支撑收腿</span><span class="ex-spec dorm-spec">每侧3组×12次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>平板支撑位，单腿屈膝向胸口拉近；骨盆保持水平不旋转；核心全程收紧；动作慢，不要借助惯性弹腿。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">弹力带俯身划船<span class="mod-badge">弹力带</span></span><span class="ex-spec dorm-spec">3组×15次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>弹力带踩在脚下，俯身约45°；拉绳时肘部贴近身体向后拉，感受背部肌肉收缩；顶部夹一下肩胛骨；腰部保持中立，不要靠腰部弹动代偿。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">侧支撑</span><span class="ex-spec dorm-spec">每侧2组×30秒</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>侧卧，手肘撑地，髋部抬离地面；身体从头到脚侧面成一直线；髋部不下沉也不翘起；感受侧腹（腹斜肌）持续发力。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">跪姿俯卧撑 → 标准俯卧撑</span><span class="ex-spec dorm-spec">3组×10次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>根据当天状态选择：能做标准俯卧撑就做，否则跪姿。手距比肩略宽；身体整体下降，不要只点头；下降时胸部接近地面；核心收紧，臀部不翘起。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">鸟狗式<span class="key-badge">⭐骨盆</span></span><span class="ex-spec dorm-spec">每侧2组×10次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>四肢撑地，手在肩下，膝在髋下；对角线的手脚同时缓慢伸出；骨盆保持水平，不要旋转；伸展时呼气，收回时吸气；这个动作训练骨盆稳定性和脊柱控制，是矫正骨盆前倾的核心动作。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num dorm-num">3</div>
+        <div><div class="block-name">动态核心燃脂</div><div class="block-dur">12分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="circuit-tag">⚡ 40秒动 + 20秒休，循环两组</div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">死虫式</span><span class="ex-spec dorm-spec">40s</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>慢速版，每次伸展保持2秒；腰部始终贴地，这是判断动作质量的唯一标准；可以减小腿的伸展幅度来保证腰部不离地。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">仰卧摸脚踝</span><span class="ex-spec dorm-spec">40s</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧屈膝，肩膀微微抬离地面；身体侧弯，右手摸右脚踝；感受同侧腹斜肌收缩；不是卷腹而是侧弯，左右交替。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">俄罗斯转体</span><span class="ex-spec dorm-spec">40s</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>坐姿，上身后倾约45°，双脚离地；躯干左右旋转，双手触地；感受腹斜肌发力；如果腰部不适可以双脚不离地。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">熊爬</span><span class="ex-spec dorm-spec">40s</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>四肢撑地，膝盖离地约5cm悬空；对角线手脚同时缓慢向前爬行；保持核心稳定，骨盆不要晃动；前进后退各半。注意动作轻，不要跺脚。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">坐姿屈膝收腹</span><span class="ex-spec dorm-spec">40s</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>坐在垫子上，上身微后倾，双手撑地；双腿屈膝抬起，向胸口收拢再伸出；感受下腹部收缩；腰部保持中立。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">平板支撑</span><span class="ex-spec dorm-spec">40s</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>作为循环收尾，保持标准姿态；正常呼吸，不要憋气；核心从内往外收紧，想象肚脐往脊柱方向靠。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num dorm-num">4</div>
+        <div><div class="block-name">泡沫轴放松</div><div class="block-dur">5分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="foam-section">
+        <div class="ex-row" onclick="toggleEx(this)">
+          <div class="ex-top"><span class="ex-name">胸椎段背部<span class="key-badge">⭐骨盆关键</span></span><span class="ex-spec dorm-spec">1分钟</span></div>
+          <div class="ex-tip"><div class="tip-label">要领</div>仰卧，泡沫轴横放在胸椎（肩胛骨之间）；双手交叉抱头，缓慢向后弯伸展；从肩胛骨下方到腰部以上逐段滚压；胸椎过紧会导致骨盆代偿性前倾，这是很多人忽视的原因。</div>
+        </div>
+        <div class="ex-row" onclick="toggleEx(this)">
+          <div class="ex-top"><span class="ex-name">腰方肌两侧</span><span class="ex-spec dorm-spec">每侧45秒</span></div>
+          <div class="ex-tip"><div class="tip-label">要领</div>侧卧，泡沫轴放腰部一侧（不是正中间）；轻轻前后滚动，缓解腰方肌紧张；腰方肌紧张会直接拉动骨盆前倾。</div>
+        </div>
+        <div class="ex-row" onclick="toggleEx(this)">
+          <div class="ex-top"><span class="ex-name">髂胫束</span><span class="ex-spec dorm-spec">每侧30秒</span></div>
+          <div class="ex-tip"><div class="tip-label">要领</div>侧卧，大腿外侧滚压，从膝盖外侧到髋部外侧。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num dorm-num">5</div>
+        <div><div class="block-name">拉伸 + 呼吸恢复</div><div class="block-dur">8分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">婴儿式放松</span><span class="ex-spec dorm-spec">2分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>跪坐臀部坐向脚跟，双手向前伸展；腹式呼吸放松背部和腰部；让身体随重力自然沉下去。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">脊柱扭转</span><span class="ex-spec dorm-spec">每侧1分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，一腿伸直，另一腿屈膝倒向对侧；对侧手轻压膝盖，同侧手臂展开；感受腰部和胸椎旋转拉伸；保持肩膀贴地。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">手臂三头肌拉伸</span><span class="ex-spec dorm-spec">每侧30秒</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>一手举起弯肘摸背部，另一手轻压肘部助力；感受上臂后侧拉伸；不要强压，感受到拉伸感即可。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">仰卧束角式放松</span><span class="ex-spec dorm-spec">2分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，脚掌相对，双膝向两侧自然下落；双手放腹部感受呼吸；完全放松，不需要主动用力；这是一天训练最好的收尾姿势。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end tabWorkout -->
+
+<!-- TIPS TAB -->
+<div id="tabTips" class="tab-page">
+  <div class="tips-page-inner">
+    <div class="tips-section-title">心率区间参考</div>
+    <div class="hr-card">
+      <div class="hr-row"><span class="hr-label">热身 / 放松区</span><span class="hr-val green">100~120 bpm</span></div>
+      <div class="hr-row"><span class="hr-label">燃脂区（轻松持续）</span><span class="hr-val green">120~135 bpm</span></div>
+      <div class="hr-row"><span class="hr-label">高效燃脂区 ⭐</span><span class="hr-val orange">135~150 bpm</span></div>
+      <div class="hr-row"><span class="hr-label">超过此值 → 降速降阻</span><span class="hr-val red">> 160 bpm</span></div>
+    </div>
+
+    <div class="tips-section-title">骨盆前倾矫正原则</div>
+    <div class="tip-card-full">
+      <div class="tip-head">需要强化的肌群</div>
+      臀大肌、臀中肌 → 臀桥、蚌式、后踢腿<br>
+      腹横肌 → 死虫式、鸟狗式、空心收腹<br>
+      腘绳肌 → 罗马尼亚硬拉（增肌期）
+    </div>
+    <div class="tip-card-full">
+      <div class="tip-head">需要拉伸的肌群</div>
+      <strong>髂腰肌</strong>（最关键）→ 跪姿髋屈肌拉伸，每天做<br>
+      股直肌 → 弓步前侧拉伸<br>
+      腰方肌 → 泡沫轴 + 脊柱扭转<br>
+      胸椎 → 泡沫轴胸椎伸展
+    </div>
+    <div class="tip-card-full">
+      <div class="tip-head">日常习惯（比训练更重要）</div>
+      ① 坐着时主动收腹，腰部不过度前凸<br>
+      ② 走路时轻收臀部，感受臀大肌参与<br>
+      ③ 每小时起身活动一次，不久坐<br>
+      ④ <strong>髂腰肌拉伸每天做</strong>，不只是训练日
+    </div>
+
+    <div class="tips-section-title">减脂饮食参考</div>
+    <div class="macro-grid">
+      <div class="macro-box protein"><div class="macro-val">150g</div><div class="macro-label">蛋白质 / 天</div></div>
+      <div class="macro-box carb"><div class="macro-val">180g</div><div class="macro-label">碳水 / 天</div></div>
+      <div class="macro-box fat"><div class="macro-val">55g</div><div class="macro-label">脂肪 / 天</div></div>
+      <div class="macro-box cal"><div class="macro-val">~1900</div><div class="macro-label">总热量 kcal</div></div>
+    </div>
+    <div class="tip-card-full">
+      <div class="tip-head">饮食执行要点</div>
+      · 蛋白质优先：鸡胸、鸡蛋、牛奶、豆腐、鱼<br>
+      · 戒含糖饮料（最简单的单项缺口）<br>
+      · 减少外卖高油食物，食堂可控<br>
+      · 训练后1小时内：蛋白质 + 少量碳水<br>
+      · <strong>饮食贡献减脂的70%，训练占30%</strong>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM TABS -->
+<div class="bottom-tabs">
+  <button class="tab-btn active" onclick="switchTab('workout', this)">
+    <span class="tab-icon">🗓</span>
+    <span class="tab-label">训练计划</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab('tips', this)">
+    <span class="tab-icon">💡</span>
+    <span class="tab-label">要领 & 饮食</span>
+  </button>
+</div>
+
+<script>
+// Switch day
+let currentDay = 0;
+function switchDay(idx) {
+  document.querySelectorAll('.day-view').forEach((d,i) => {
+    d.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('.day-chip').forEach((c,i) => {
+    c.style.opacity = i === idx ? '1' : '0.5';
+  });
+  currentDay = idx;
+  document.querySelector('.main-scroll') && (document.querySelector('.main-scroll').scrollTop = 0);
+  document.getElementById('tabWorkout').scrollTop = 0;
+}
+
+// Toggle block
+function toggleBlock(header) {
+  const card = header.parentElement;
+  card.classList.toggle('open');
+}
+
+// Toggle exercise tip
+function toggleEx(row) {
+  row.classList.toggle('open');
+}
+
+// Switch tab
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Auto-highlight today
+const days = ['日','一','二','三','四','五','六'];
+const todayIdx = new Date().getDay();
+const map = {0:6, 1:0, 2:1, 3:2, 4:3, 5:4, 6:5};
+switchDay(map[todayIdx]);
+</script>
+</body>
+</html>
