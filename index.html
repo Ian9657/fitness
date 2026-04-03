@@ -447,9 +447,9 @@ html, body {
   <div class="header-inner">
     <div>
       <div class="app-title">减脂训练计划</div>
-      <div class="app-subtitle">健身房 ×4 · 宿舍 ×2 · 周二休息</div>
+      <div class="app-subtitle">减脂 + 体态矫正 · 周二休息</div>
     </div>
-    <div class="week-badge">2~3月计划</div>
+    <div class="week-badge">4月优化版</div>
   </div>
   <div class="week-bar" id="weekBar">
     <div class="day-chip active-gym" onclick="switchDay(0)">
@@ -499,9 +499,10 @@ html, body {
     <div class="hero-type">周一 · 健身房 A</div>
     <div class="hero-title">有氧燃脂日</div>
     <div class="hero-tags">
-      <span class="hero-tag">⏱ 约35分钟</span>
+      <span class="hero-tag">⏱ 约40分钟</span>
       <span class="hero-tag">🎯 130~150 bpm</span>
       <span class="hero-tag">🔥 椭圆机主导</span>
+      <span class="hero-tag">🦴 含呼吸矫正</span>
     </div>
   </div>
 
@@ -509,6 +510,54 @@ html, body {
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
         <div class="block-num gym-num">1</div>
+        <div><div class="block-name">呼吸复位</div><div class="block-dur">3分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">90-90 呼吸复位<span class="key-badge">⭐矫正</span></span><span class="ex-spec gym-spec">5次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，双腿搭在椅子/器械上，髋膝均90°；后腰完全贴地；纯鼻呼吸：鼻吸4秒（肋骨向两侧扩张）→ 鼻呼8秒（肋骨向内下回收）；呼气末主动收腹，感受肋骨"关闭"。PRI体系核心动作，同时矫正肋骨外翻和训练鼻呼吸。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">舌位训练（Mewing）</span><span class="ex-spec gym-spec">30秒×3</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>舌头整面吸附上颚（不只是舌尖），牙齿轻合，唇闭合；保持鼻呼吸。纠正口呼吸的基础——培养正确的舌头静息位。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">Buteyko 控制暂停</span><span class="ex-spec gym-spec">3次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>正常鼻吸→正常鼻呼→捏鼻暂停→感到第一个想吸气的冲动时松手恢复鼻呼吸。不是憋气比赛，目标是舒适的暂停。逐步提高鼻腔通气能力。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">2</div>
+        <div><div class="block-name">踝关节热身</div><div class="block-dur">3分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">踝关节画圈</span><span class="ex-spec gym-spec">每侧10圈×正反</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>单脚站立（可扶墙），悬空脚画大圈；重点感受右脚踝的活动度差异；如果右侧明显比左侧"卡"，说明踝关节活动度受限。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">弓步踝背屈拉伸</span><span class="ex-spec gym-spec">每侧30秒</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>面墙弓步，前脚脚跟不离地，膝盖缓慢向前推向墙壁；感受跟腱和小腿后侧拉伸。高足弓者跟腱通常偏紧，改善踝关节背屈活动度。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">单腿站立平衡<span class="key-badge">⭐踝关节</span></span><span class="ex-spec gym-spec">每侧30秒</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>赤脚单腿站立，注意三点着地（大脚趾根、小脚趾根、脚跟）；高足弓者容易重心偏外侧，有意识将重心向内侧分配。专注右脚踝稳定性。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">3</div>
         <div><div class="block-name">有氧主体</div><div class="block-dur">25分钟</div></div>
       </div>
       <span class="chevron">▾</span>
@@ -516,7 +565,7 @@ html, body {
     <div class="block-body">
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">椭圆机 · 中等阻力</span><span class="ex-spec gym-spec">25min</span></div>
-        <div class="ex-tip"><div class="tip-label">动作要领</div>不扶把手，直立站稳，核心轻收；步频稳定，不要耸肩；阻力调至感觉"有点费力但能持续"的程度。不扶把手可多激活核心和腿部约15%。</div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>双手轻扶把手（不是用力抓），重点关注：① 骨盆保持朝正前方，不要左旋；② 双脚均匀踩踏，注意右脚踝是否有不适；③ 核心轻收。等旋转代偿改善后再过渡到不扶。</div>
       </div>
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">目标心率区间</span><span class="ex-spec gym-spec">130~150</span></div>
@@ -528,7 +577,7 @@ html, body {
   <div class="block-card">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
-        <div class="block-num gym-num">2</div>
+        <div class="block-num gym-num">4</div>
         <div><div class="block-name">有氧收尾</div><div class="block-dur">8分钟</div></div>
       </div>
       <span class="chevron">▾</span>
@@ -536,7 +585,7 @@ html, body {
     <div class="block-body">
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">跑步机坡度快走</span><span class="ex-spec gym-spec">8min</span></div>
-        <div class="ex-tip"><div class="tip-label">动作要领</div>坡度 6~8%，速度 5.5~6 km/h；身体轻微前倾，不要驼背；手臂自然摆动，不要扶扶手；感受臀腿发力，尤其是臀大肌。</div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>坡度 4~6%，速度 5.5~6 km/h；身体轻微前倾，不要驼背；手臂自然摆动，不要扶扶手；感受臀腿发力，尤其是臀大肌。如右脚踝不适立即降至平地。</div>
       </div>
     </div>
   </div>
@@ -544,7 +593,7 @@ html, body {
   <div class="block-card">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
-        <div class="block-num gym-num">3</div>
+        <div class="block-num gym-num">5</div>
         <div><div class="block-name">放松收尾</div><div class="block-dur">2分钟</div></div>
       </div>
       <span class="chevron">▾</span>
@@ -552,7 +601,7 @@ html, body {
     <div class="block-body">
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">原地踱步 + 深呼吸</span><span class="ex-spec gym-spec">2min</span></div>
-        <div class="ex-tip"><div class="tip-label">要点</div>心率降至100以下再离开。鼻吸嘴呼，4秒吸气、6秒呼气，放松肩颈。</div>
+        <div class="ex-tip"><div class="tip-label">要点</div>心率降至100以下再离开。纯鼻呼吸：鼻吸4秒、鼻呼6秒，嘴闭合、舌抵上颚，放松肩颈。</div>
       </div>
     </div>
   </div>
@@ -586,17 +635,24 @@ html, body {
     <div class="block-body">
       <div class="foam-section">
         <div class="foam-item"><span>轻松散步</span><span class="foam-spec" style="color:var(--rest)">20~30分钟</span></div>
+        <div class="foam-item"><span>90-90 呼吸复位</span><span class="foam-spec" style="color:var(--rest)">5次呼吸</span></div>
+        <div class="foam-item"><span>舌位训练 + Buteyko</span><span class="foam-spec" style="color:var(--rest)">3分钟</span></div>
+        <div class="foam-item"><span>踝关节画圈</span><span class="foam-spec" style="color:var(--rest)">每侧10圈</span></div>
+        <div class="foam-item"><span>跪姿髋屈肌拉伸</span><span class="foam-spec" style="color:var(--rest)">每侧1分钟</span></div>
         <div class="foam-item"><span>全身静态拉伸（可选）</span><span class="foam-spec" style="color:var(--rest)">10分钟</span></div>
         <div class="foam-item"><span>睡眠</span><span class="foam-spec" style="color:var(--rest)">7~8小时</span></div>
       </div>
     </div>
   </div>
   <div class="note-box">
-    <div class="note-title">骨盆前倾日常提醒</div>
-    今天不训练，但这三件事每天都要做：<br>
-    ① 坐着时主动收腹，别塌腰<br>
-    ② 走路时轻收臀部<br>
-    ③ 每小时起身活动一次
+    <div class="note-title">全身矫正日常提醒</div>
+    今天不训练，但这六件事每天都要做：<br>
+    ① 坐着/站着时：嘴闭合，舌贴上颚，鼻呼吸<br>
+    ② 坐着时主动收腹，别塌腰<br>
+    ③ 走路时轻收臀部，感受臀大肌参与<br>
+    ④ 站立时膝盖微弯，不要锁膝超伸<br>
+    ⑤ 每小时起身活动一次<br>
+    ⑥ 注意站立时重心是否偏左，有意识双脚均匀承重
   </div>
 </div>
 
@@ -606,9 +662,10 @@ html, body {
     <div class="hero-type">周三 · 健身房 B</div>
     <div class="hero-title">有氧燃脂日</div>
     <div class="hero-tags">
-      <span class="hero-tag">⏱ 约35分钟</span>
+      <span class="hero-tag">⏱ 约40分钟</span>
       <span class="hero-tag">🎯 130~145 bpm</span>
       <span class="hero-tag">🔥 划船机主导</span>
+      <span class="hero-tag">🦴 含呼吸矫正</span>
     </div>
   </div>
 
@@ -616,14 +673,18 @@ html, body {
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
         <div class="block-num gym-num">1</div>
-        <div><div class="block-name">有氧主体</div><div class="block-dur">20分钟</div></div>
+        <div><div class="block-name">呼吸复位</div><div class="block-dur">3分钟</div></div>
       </div>
       <span class="chevron">▾</span>
     </div>
     <div class="block-body">
       <div class="ex-row" onclick="toggleEx(this)">
-        <div class="ex-top"><span class="ex-name">划船机 · 中等配速<span class="key-badge">⭐矫正</span></span><span class="ex-spec gym-spec">20min</span></div>
-        <div class="ex-tip"><div class="tip-label">动作要领</div>坐直，不弓腰；拉桨时先蹬腿、再收腹、最后手臂拉；回程先伸手臂、再屈腿；全程核心收紧。划船机是难得的既燃脂又锻炼脊柱伸展的器械，对骨盆前倾矫正有一定帮助。</div>
+        <div class="ex-top"><span class="ex-name">90-90 呼吸复位<span class="key-badge">⭐矫正</span></span><span class="ex-spec gym-spec">5次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，髋膝均90°；后腰贴地；鼻吸4秒→鼻呼8秒；呼气末收腹，肋骨回收。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">舌位训练 + Buteyko</span><span class="ex-spec gym-spec">2分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>舌贴上颚30秒×3 + 控制暂停3次。</div>
       </div>
     </div>
   </div>
@@ -632,14 +693,18 @@ html, body {
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
         <div class="block-num gym-num">2</div>
-        <div><div class="block-name">有氧次体</div><div class="block-dur">12分钟</div></div>
+        <div><div class="block-name">踝关节热身</div><div class="block-dur">3分钟</div></div>
       </div>
       <span class="chevron">▾</span>
     </div>
     <div class="block-body">
       <div class="ex-row" onclick="toggleEx(this)">
-        <div class="ex-top"><span class="ex-name">单车 · 中等阻力</span><span class="ex-spec gym-spec">12min</span></div>
-        <div class="ex-tip"><div class="tip-label">动作要领</div>座位调至踩到最低点时腿微弯（非完全伸直）；踩踏时脚尖略向下，感受大腿和臀部发力；上身挺直，不要趴在把手上。心率维持 125~145 bpm。</div>
+        <div class="ex-top"><span class="ex-name">踝关节画圈 + 背屈拉伸</span><span class="ex-spec gym-spec">2分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>画圈每侧10圈正反 + 面墙弓步踝背屈每侧30秒。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">单腿站立平衡<span class="key-badge">⭐踝关节</span></span><span class="ex-spec gym-spec">每侧30秒</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>赤脚三点着地，专注右脚踝稳定性。</div>
       </div>
     </div>
   </div>
@@ -648,6 +713,38 @@ html, body {
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
         <div class="block-num gym-num">3</div>
+        <div><div class="block-name">有氧主体</div><div class="block-dur">20分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">划船机 · 中等配速<span class="key-badge">⭐矫正</span></span><span class="ex-spec gym-spec">20min</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>坐直，不弓腰；拉桨时先蹬腿、再收腹、最后手臂拉；回程先伸手臂、再屈腿；全程核心收紧。划船机既燃脂又锻炼脊柱伸展，对骨盆前倾矫正有帮助。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">4</div>
+        <div><div class="block-name">有氧次体</div><div class="block-dur">12分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">单车 · 中等阻力</span><span class="ex-spec gym-spec">12min</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>座位调至踩到最低点时腿微弯；上身挺直；心率维持 125~145 bpm。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">5</div>
         <div><div class="block-name">放松收尾</div><div class="block-dur">3分钟</div></div>
       </div>
       <span class="chevron">▾</span>
@@ -655,7 +752,7 @@ html, body {
     <div class="block-body">
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">原地踱步 · 肩颈放松</span><span class="ex-spec gym-spec">3min</span></div>
-        <div class="ex-tip"><div class="tip-label">要点</div>做几次耸肩后下压的动作放松斜方肌，因为划船机容易让肩颈发紧。</div>
+        <div class="ex-tip"><div class="tip-label">要点</div>耸肩后下压放松斜方肌，纯鼻呼吸放松。</div>
       </div>
     </div>
   </div>
@@ -667,9 +764,9 @@ html, body {
     <div class="hero-type">周四 · 宿舍 A</div>
     <div class="hero-title">臀腿 + 骨盆矫正</div>
     <div class="hero-tags">
-      <span class="hero-tag">⏱ 约55分钟</span>
+      <span class="hero-tag">⏱ 约60分钟</span>
       <span class="hero-tag">🎯 源自 Day 1</span>
-      <span class="hero-tag">🦴 骨盆重点日</span>
+      <span class="hero-tag">🦴 骨盆+呼吸重点日</span>
     </div>
   </div>
 
@@ -677,6 +774,26 @@ html, body {
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
         <div class="block-num dorm-num">1</div>
+        <div><div class="block-name">呼吸复位</div><div class="block-dur">3分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">90-90 呼吸复位<span class="key-badge">⭐矫正</span></span><span class="ex-spec dorm-spec">5次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，双腿搭在床上，髋膝均90°；后腰贴地；鼻吸4秒→鼻呼8秒；呼气末收腹，感受肋骨"关闭"。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">舌位训练 + Buteyko</span><span class="ex-spec dorm-spec">2分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>舌贴上颚30秒×3 + 控制暂停3次。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num dorm-num">2</div>
         <div><div class="block-name">热身 + 凯格尔激活</div><div class="block-dur">8分钟</div></div>
       </div>
       <span class="chevron">▾</span>
@@ -692,15 +809,15 @@ html, body {
       </div>
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">死虫式<span class="key-badge">⭐核心</span></span><span class="ex-spec dorm-spec">每侧8次</span></div>
-        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，手臂垂直举起，双腿抬起屈膝90°；呼气，右手向后伸展的同时左腿缓慢向前下方伸出；全程腰部贴地不离地；吸气还原。腰部离地说明核心力量不足，减小腿的伸展幅度。</div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，手臂垂直举起，双腿抬起屈膝90°；呼气，右手向后伸展的同时左腿缓慢向前下方伸出；全程腰部贴地不离地；吸气还原。</div>
       </div>
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">臀桥</span><span class="ex-spec dorm-spec">15次</span></div>
-        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧屈膝，脚跟靠近臀部；呼气时收紧臀部，用臀部力量将髋部推高；顶部停留1秒，感受臀部最大收缩；缓慢下降不完全落地。避免用腰部代偿。</div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧屈膝，脚跟靠近臀部；呼气时收紧臀部将髋部推高；顶部停留1秒；缓慢下降不完全落地。避免用腰部代偿。</div>
       </div>
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">原地慢速踏步提膝<span class="mod-badge">静音版</span></span><span class="ex-spec dorm-spec">40秒</span></div>
-        <div class="ex-tip"><div class="tip-label">动作要领</div>替换原计划高抬腿。慢速提膝至腰部高度，轻放落地；重心在支撑腿上，保持躯干直立；有意识地收紧核心，感受髋屈肌的工作。</div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>慢速提膝至腰部高度，轻放落地；保持躯干直立，收紧核心。</div>
       </div>
     </div>
   </div>
@@ -708,7 +825,7 @@ html, body {
   <div class="block-card">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
-        <div class="block-num dorm-num">2</div>
+        <div class="block-num dorm-num">3</div>
         <div><div class="block-name">核心燃脂循环</div><div class="block-dur">10分钟</div></div>
       </div>
       <span class="chevron">▾</span>
@@ -717,23 +834,23 @@ html, body {
       <div class="circuit-tag">⚡ 45秒动 + 15秒休，循环两组</div>
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">相扑深蹲</span><span class="ex-spec dorm-spec">45s</span></div>
-        <div class="ex-tip"><div class="tip-label">动作要领</div>站距比肩宽，脚尖朝外45°；下蹲时膝盖对准脚尖方向，不内扣；躯干挺直，不弓腰；下到大腿与地面平行；起身时臀部发力。感受内收肌和臀部拉伸。</div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>站距比肩宽，脚尖朝外45°；膝盖对准脚尖，不内扣；臀部发力起身。</div>
       </div>
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">站姿提膝击掌（慢速）</span><span class="ex-spec dorm-spec">45s</span></div>
-        <div class="ex-tip"><div class="tip-label">动作要领</div>单腿站立时收紧支撑腿的臀部；提膝时腰部不要弯曲；双手从两侧击掌的同时，感受腹部收紧。慢速控制，不要借助惯性。</div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>单腿站立时收紧支撑腿臀部；慢速控制，不借助惯性。</div>
       </div>
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">后撤步箭步蹲</span><span class="ex-spec dorm-spec">45s</span></div>
-        <div class="ex-tip"><div class="tip-label">动作要领</div>一脚向后迈出，前腿膝盖不超过脚尖；后膝接近但不触地；躯干直立，不前倾；两腿交替进行。感受前腿臀部和大腿的拉伸与发力。</div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>一脚后迈，前膝不超脚尖；躯干直立；两腿交替。</div>
       </div>
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">侧腹卷腹</span><span class="ex-spec dorm-spec">45s</span></div>
-        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，手放耳侧；卷腹时右肘朝向左膝，感受右侧腹肌收缩；不要用手拉头颈；下背部始终贴地；左右交替。</div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，手放耳侧；右肘朝向左膝；下背部贴地；左右交替。</div>
       </div>
       <div class="ex-row" onclick="toggleEx(this)">
-        <div class="ex-top"><span class="ex-name">靠墙静蹲</span><span class="ex-spec dorm-spec">45s</span></div>
-        <div class="ex-tip"><div class="tip-label">动作要领</div>背靠墙，膝盖弯曲90°，大腿与地面平行；脚跟在膝盖正下方；双手放膝盖上不要借力；感受股四头肌持续发力。坚持住，这是本循环里强度最高的动作。</div>
+        <div class="ex-top"><span class="ex-name">臀桥保持<span class="key-badge">⭐替换静蹲</span></span><span class="ex-spec dorm-spec">45s</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>臀桥顶端夹紧臀部保持45秒。替代靠墙静蹲——你有膝超伸，股四头肌已过度激活，需要臀肌主导的等长收缩而非股四头肌主导。</div>
       </div>
     </div>
   </div>
@@ -777,7 +894,7 @@ html, body {
   <div class="block-card">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
-        <div class="block-num dorm-num">4</div>
+        <div class="block-num dorm-num">5</div>
         <div><div class="block-name">泡沫轴放松</div><div class="block-dur">5分钟</div></div>
       </div>
       <span class="chevron">▾</span>
@@ -804,27 +921,31 @@ html, body {
   <div class="block-card">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
-        <div class="block-num dorm-num">5</div>
-        <div><div class="block-name">拉伸放松</div><div class="block-dur">7分钟</div></div>
+        <div class="block-num dorm-num">6</div>
+        <div><div class="block-name">拉伸放松</div><div class="block-dur">9分钟</div></div>
       </div>
       <span class="chevron">▾</span>
     </div>
     <div class="block-body">
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">蛙式拉伸</span><span class="ex-spec dorm-spec">2分钟</span></div>
-        <div class="ex-tip"><div class="tip-label">动作要领</div>双膝跪地向两侧打开，脚尖朝外；慢慢将臀部向后下方坐；感受大腿内侧和髋关节拉伸；保持自然呼吸，不要憋气；感觉拉伸逐渐加深属正常。</div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>双膝跪地向两侧打开；臀部向后下方坐；感受大腿内侧和髋关节拉伸。</div>
       </div>
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">仰卧抱膝放松</span><span class="ex-spec dorm-spec">1分钟</span></div>
-        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，双手抱膝贴向胸口；轻轻左右摇摆，放松腰部和骶髂关节；这个动作对久坐造成的骨盆前倾有很好的即时缓解效果。</div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，双手抱膝贴向胸口；轻轻左右摇摆，放松腰部和骶髂关节。</div>
       </div>
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">跪姿髋屈肌拉伸<span class="key-badge">⭐骨盆关键</span></span><span class="ex-spec dorm-spec">每侧1分钟</span></div>
-        <div class="ex-tip"><div class="tip-label">动作要领</div>单膝跪地，前腿屈膝90°；骨盆向后倾（收腹、夹臀），然后重心缓慢前移；感受后腿大腿前侧和腹股沟深处拉伸；这里就是髂腰肌，骨盆前倾的主要"罪魁祸首"。每次拉伸都要认真做。</div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>单膝跪地，前腿屈膝90°；骨盆向后倾（收腹、夹臀），然后重心缓慢前移；感受后腿大腿前侧和腹股沟深处拉伸；这里就是髂腰肌，骨盆前倾的主要"罪魁祸首"。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">PRI 右侧卧呼吸<span class="key-badge">⭐抗旋转</span></span><span class="ex-spec dorm-spec">5次呼吸</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>右侧卧，双膝弯曲；左手放在右侧肋骨上感受肋骨回收；纯鼻呼吸，吸气4秒呼气8秒。这个体位帮助矫正你的髋左旋+躯干右旋模式，非常适合你的旋转代偿。</div>
       </div>
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">婴儿式呼吸</span><span class="ex-spec dorm-spec">2分钟</span></div>
-        <div class="ex-tip"><div class="tip-label">动作要领</div>跪坐，臀部坐向脚跟，双手向前伸展趴下；进行腹式呼吸：吸气感受腹部和背部膨胀，呼气放松全身；让脊柱在重力下自然拉伸。</div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>跪坐，臀部坐向脚跟，双手向前伸展趴下；进行鼻式腹式呼吸，嘴闭合；吸气感受腹部和背部膨胀，呼气放松全身。</div>
       </div>
     </div>
   </div>
@@ -836,15 +957,16 @@ html, body {
     <div class="hero-type">周五 · 健身房 C</div>
     <div class="hero-title">有氧燃脂日</div>
     <div class="hero-tags">
-      <span class="hero-tag">⏱ 约35分钟</span>
+      <span class="hero-tag">⏱ 约40分钟</span>
       <span class="hero-tag">🎯 130~148 bpm</span>
       <span class="hero-tag">🔥 坡度快走主导</span>
+      <span class="hero-tag">🦴 含呼吸矫正</span>
     </div>
   </div>
-  <div class="block-card open">
+  <div class="block-card">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
-        <div class="block-num gym-num">1</div>
+        <div class="block-num gym-num">3</div>
         <div><div class="block-name">有氧主体</div><div class="block-dur">25分钟</div></div>
       </div>
       <span class="chevron">▾</span>
@@ -852,14 +974,56 @@ html, body {
     <div class="block-body">
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">跑步机坡度快走<span class="key-badge">⭐臀腿</span></span><span class="ex-spec gym-spec">25min</span></div>
-        <div class="ex-tip"><div class="tip-label">动作要领</div>坡度 8~10%，速度 5.5~6.5 km/h；不扶扶手；身体轻微前倾但不驼背；感受每一步臀大肌的发力；相比平地跑，坡度快走更护膝、臀腿激活效果更强，是减脂期最推荐的有氧方式之一。</div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>坡度 6~8%，速度 5.5~6.5 km/h；不扶扶手；身体轻微前倾但不驼背；感受每一步臀大肌的发力；相比平地跑，坡度快走更护膝、臀腿激活效果更强，是减脂期最推荐的有氧方式之一。</div>
       </div>
     </div>
   </div>
+
+  <div class="block-card open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">1</div>
+        <div><div class="block-name">呼吸复位</div><div class="block-dur">3分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">90-90 呼吸复位<span class="key-badge">⭐矫正</span></span><span class="ex-spec gym-spec">5次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，髋膝均90°；后腰贴地；鼻吸4秒→鼻呼8秒；呼气末收腹，肋骨回收。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">舌位训练 + Buteyko</span><span class="ex-spec gym-spec">2分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>舌贴上颚30秒×3 + 控制暂停3次。</div>
+      </div>
+    </div>
+  </div>
+
   <div class="block-card">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
         <div class="block-num gym-num">2</div>
+        <div><div class="block-name">踝关节热身</div><div class="block-dur">3分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">踝关节画圈 + 背屈拉伸</span><span class="ex-spec gym-spec">2分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>画圈每侧10圈 + 弓步踝背屈每侧30秒。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">单腿站立平衡<span class="key-badge">⭐踝关节</span></span><span class="ex-spec gym-spec">每侧30秒</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>赤脚三点着地，专注右脚踝稳定性。</div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">4</div>
         <div><div class="block-name">有氧收尾</div><div class="block-dur">8分钟</div></div>
       </div>
       <span class="chevron">▾</span>
@@ -874,7 +1038,7 @@ html, body {
   <div class="block-card">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
-        <div class="block-num gym-num">3</div>
+        <div class="block-num gym-num">5</div>
         <div><div class="block-name">放松收尾</div><div class="block-dur">2分钟</div></div>
       </div>
       <span class="chevron">▾</span>
@@ -894,15 +1058,16 @@ html, body {
     <div class="hero-type">周六 · 健身房 D</div>
     <div class="hero-title">有氧燃脂日</div>
     <div class="hero-tags">
-      <span class="hero-tag">⏱ 约35分钟</span>
+      <span class="hero-tag">⏱ 约40分钟</span>
       <span class="hero-tag">🎯 130~150 bpm</span>
       <span class="hero-tag">🔥 单车主导</span>
+      <span class="hero-tag">🦴 含呼吸矫正</span>
     </div>
   </div>
-  <div class="block-card open">
+  <div class="block-card">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
-        <div class="block-num gym-num">1</div>
+        <div class="block-num gym-num">3</div>
         <div><div class="block-name">有氧主体</div><div class="block-dur">20分钟</div></div>
       </div>
       <span class="chevron">▾</span>
@@ -914,10 +1079,52 @@ html, body {
       </div>
     </div>
   </div>
+
+  <div class="block-card open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">1</div>
+        <div><div class="block-name">呼吸复位</div><div class="block-dur">3分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">90-90 呼吸复位<span class="key-badge">⭐矫正</span></span><span class="ex-spec gym-spec">5次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，髋膝均90°；后腰贴地；鼻吸4秒→鼻呼8秒；呼气末收腹，肋骨回收。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">舌位训练 + Buteyko</span><span class="ex-spec gym-spec">2分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>舌贴上颚30秒×3 + 控制暂停3次。</div>
+      </div>
+    </div>
+  </div>
+
   <div class="block-card">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
         <div class="block-num gym-num">2</div>
+        <div><div class="block-name">踝关节热身</div><div class="block-dur">3分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">踝关节画圈 + 背屈拉伸</span><span class="ex-spec gym-spec">2分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>画圈每侧10圈 + 弓步踝背屈每侧30秒。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">单腿站立平衡<span class="key-badge">⭐踝关节</span></span><span class="ex-spec gym-spec">每侧30秒</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>赤脚三点着地，专注右脚踝稳定性。</div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="block-card">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num gym-num">4</div>
         <div><div class="block-name">有氧次体</div><div class="block-dur">12分钟</div></div>
       </div>
       <span class="chevron">▾</span>
@@ -932,7 +1139,7 @@ html, body {
   <div class="block-card">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
-        <div class="block-num gym-num">3</div>
+        <div class="block-num gym-num">5</div>
         <div><div class="block-name">放松收尾</div><div class="block-dur">3分钟</div></div>
       </div>
       <span class="chevron">▾</span>
@@ -952,11 +1159,33 @@ html, body {
     <div class="hero-type">周日 · 宿舍 B</div>
     <div class="hero-title">上肢 + 核心控制</div>
     <div class="hero-tags">
-      <span class="hero-tag">⏱ 约55分钟</span>
+      <span class="hero-tag">⏱ 约60分钟</span>
       <span class="hero-tag">🎯 源自 Day 2</span>
-      <span class="hero-tag">💪 核心重点日</span>
+      <span class="hero-tag">💪 核心+抗旋转</span>
     </div>
   </div>
+
+
+  <div class="block-card open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-title-row">
+        <div class="block-num dorm-num">1</div>
+        <div><div class="block-name">呼吸复位</div><div class="block-dur">3分钟</div></div>
+      </div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="block-body">
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">90-90 呼吸复位<span class="key-badge">⭐矫正</span></span><span class="ex-spec dorm-spec">5次</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧，髋膝均90°；后腰贴地；鼻吸4秒→鼻呼8秒；呼气末收腹，肋骨回收。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">舌位训练 + Buteyko</span><span class="ex-spec dorm-spec">2分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>舌贴上颚30秒×3 + 控制暂停3次。</div>
+      </div>
+    </div>
+  </div>
+
 
   <div class="block-card open">
     <div class="block-header" onclick="toggleBlock(this)">
@@ -993,7 +1222,7 @@ html, body {
   <div class="block-card">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
-        <div class="block-num dorm-num">2</div>
+        <div class="block-num dorm-num">3</div>
         <div><div class="block-name">上肢力量与核心</div><div class="block-dur">15分钟</div></div>
       </div>
       <span class="chevron">▾</span>
@@ -1025,7 +1254,7 @@ html, body {
   <div class="block-card">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
-        <div class="block-num dorm-num">3</div>
+        <div class="block-num dorm-num">4</div>
         <div><div class="block-name">动态核心燃脂</div><div class="block-dur">12分钟</div></div>
       </div>
       <span class="chevron">▾</span>
@@ -1041,8 +1270,8 @@ html, body {
         <div class="ex-tip"><div class="tip-label">动作要领</div>仰卧屈膝，肩膀微微抬离地面；身体侧弯，右手摸右脚踝；感受同侧腹斜肌收缩；不是卷腹而是侧弯，左右交替。</div>
       </div>
       <div class="ex-row" onclick="toggleEx(this)">
-        <div class="ex-top"><span class="ex-name">俄罗斯转体</span><span class="ex-spec dorm-spec">40s</span></div>
-        <div class="ex-tip"><div class="tip-label">动作要领</div>坐姿，上身后倾约45°，双脚离地；躯干左右旋转，双手触地；感受腹斜肌发力；如果腰部不适可以双脚不离地。</div>
+        <div class="ex-top"><span class="ex-name">弹力带 Pallof Press<span class="key-badge">⭐抗旋转</span></span><span class="ex-spec dorm-spec">40s</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>弹力带固定在体侧（门把手），双手握带向前推出；核心抵抗旋转力。替代俄罗斯转体——你有髋旋转代偿，需要训练"抵抗旋转"。每侧各做一半。</div>
       </div>
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">熊爬</span><span class="ex-spec dorm-spec">40s</span></div>
@@ -1062,7 +1291,7 @@ html, body {
   <div class="block-card">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
-        <div class="block-num dorm-num">4</div>
+        <div class="block-num dorm-num">5</div>
         <div><div class="block-name">泡沫轴放松</div><div class="block-dur">5分钟</div></div>
       </div>
       <span class="chevron">▾</span>
@@ -1088,7 +1317,7 @@ html, body {
   <div class="block-card">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-title-row">
-        <div class="block-num dorm-num">5</div>
+        <div class="block-num dorm-num">6</div>
         <div><div class="block-name">拉伸 + 呼吸恢复</div><div class="block-dur">8分钟</div></div>
       </div>
       <span class="chevron">▾</span>
@@ -1105,6 +1334,10 @@ html, body {
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">手臂三头肌拉伸</span><span class="ex-spec dorm-spec">每侧30秒</span></div>
         <div class="ex-tip"><div class="tip-label">动作要领</div>一手举起弯肘摸背部，另一手轻压肘部助力；感受上臂后侧拉伸；不要强压，感受到拉伸感即可。</div>
+      </div>
+      <div class="ex-row" onclick="toggleEx(this)">
+        <div class="ex-top"><span class="ex-name">下颌放松 + 颈部拉伸<span class="key-badge">⭐TMJ</span></span><span class="ex-spec dorm-spec">2分钟</span></div>
+        <div class="ex-tip"><div class="tip-label">动作要领</div>嘴微张，舌抵上颚；下巴轻微左右滑动；指腹按压右侧下颌关节画小圈1分钟。然后头左倾，拉伸右侧斜方肌上束30秒（右侧颈部短缩需重点拉伸）。</div>
       </div>
       <div class="ex-row" onclick="toggleEx(this)">
         <div class="ex-top"><span class="ex-name">仰卧束角式放松</span><span class="ex-spec dorm-spec">2分钟</span></div>
@@ -1151,18 +1384,64 @@ html, body {
 
     <div class="tips-section-title">减脂饮食参考</div>
     <div class="macro-grid">
-      <div class="macro-box protein"><div class="macro-val">150g</div><div class="macro-label">蛋白质 / 天</div></div>
-      <div class="macro-box carb"><div class="macro-val">180g</div><div class="macro-label">碳水 / 天</div></div>
-      <div class="macro-box fat"><div class="macro-val">55g</div><div class="macro-label">脂肪 / 天</div></div>
-      <div class="macro-box cal"><div class="macro-val">~1900</div><div class="macro-label">总热量 kcal</div></div>
+      <div class="macro-box protein"><div class="macro-val">160g</div><div class="macro-label">蛋白质 / 天</div></div>
+      <div class="macro-box carb"><div class="macro-val">240g</div><div class="macro-label">碳水 / 天</div></div>
+      <div class="macro-box fat"><div class="macro-val">70g</div><div class="macro-label">脂肪 / 天</div></div>
+      <div class="macro-box cal"><div class="macro-val">~2230</div><div class="macro-label">总热量 kcal</div></div>
     </div>
     <div class="tip-card-full">
       <div class="tip-head">饮食执行要点</div>
-      · 蛋白质优先：鸡胸、鸡蛋、牛奶、豆腐、鱼<br>
-      · 戒含糖饮料（最简单的单项缺口）<br>
-      · 减少外卖高油食物，食堂可控<br>
-      · 训练后1小时内：蛋白质 + 少量碳水<br>
-      · <strong>饮食贡献减脂的70%，训练占30%</strong>
+      · 蛋白质优先：鸡胸、鸡蛋、牛奶、豆腐、鱼、虾<br>
+      · <strong>脂肪不能太低</strong>：坚果一把 + 别去蛋黄 + 适量用油<br>
+      · 碳水选低GI：糙米/燕麦/红薯 > 白米白面<br>
+      · 戒含糖饮料<br>
+      · 训练后1h：蛋白30g + 碳水50g<br>
+      · <strong>不要节食</strong>，目标是"吃够但别吃多"<br>
+      · 饮食贡献减脂70%，训练30%——饮食≠少吃，是吃对
+    </div>
+
+    <div class="tips-section-title">呼吸与面部矫正原则</div>
+    <div class="tip-card-full">
+      <div class="tip-head">需要训练的</div>
+      <strong>鼻呼吸习惯</strong> → 90-90呼吸、Buteyko<br>
+      <strong>舌位</strong> → 舌头全面贴上颚（Mewing）<br>
+      <strong>膈肌功能</strong> → 腹式呼吸、肋骨回收
+    </div>
+    <div class="tip-card-full">
+      <div class="tip-head">日常最重要的一件事</div>
+      <strong>闭嘴！</strong>尤其是睡觉时。可考虑口呼吸矫正贴。<br><br>
+      <strong>建议检查：</strong>耳鼻喉科排除鼻中隔偏曲/鼻甲肥大。排除后，Buteyko训练有效。
+    </div>
+
+    <div class="tips-section-title">旋转代偿矫正原则</div>
+    <div class="tip-card-full">
+      <div class="tip-head">你的旋转模式</div>
+      髋左旋 → 躯干右旋 → 脸右扭 → 右TMJ受压
+    </div>
+    <div class="tip-card-full">
+      <div class="tip-head">需要训练 / 避免</div>
+      训练：Pallof Press · PRI右侧卧呼吸 · 单腿平衡<br>
+      避免：大幅旋转训练 · 翘二郎腿 · 歪头看屏幕
+    </div>
+
+    <div class="tips-section-title">分阶段减脂策略（TDEE≈2750kcal）</div>
+    <div class="tip-card-full">
+      <div class="tip-head">第1~4周 · 适应期</div>
+      摄入 <strong>2300 kcal</strong>（缺口~450）<br>预计减 1.5~2 kg
+    </div>
+    <div class="tip-card-full">
+      <div class="tip-head">第5~10周 · 主减脂期</div>
+      摄入 <strong>2200 kcal</strong>（缺口~550）<br>预计减 2.5~3 kg
+    </div>
+    <div class="tip-card-full">
+      <div class="tip-head">第11~16周 · 精修期</div>
+      摄入 <strong>2150~2250 kcal</strong>（灵活调整）<br>预计减 1~2 kg → 目标78~80kg
+    </div>
+    <div class="tip-card-full">
+      <div class="tip-head">⚠️ 监控规则</div>
+      · 晨起空腹称重，取周平均值<br>
+      · 2周不变 → 降100kcal 或加10min有氧<br>
+      · 1周掉>1kg → 加100kcal
     </div>
   </div>
 </div>
